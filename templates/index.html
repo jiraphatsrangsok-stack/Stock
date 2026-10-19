@@ -642,6 +642,18 @@
 
             html2pdf().from(element).save(`stock_logs_report_${new Date().toISOString().slice(0,10)}.pdf`);
         }
+
+     // ให้หน้าเว็บดึงข้อมูลใหม่มาอัปเดตอัตโนมัติทุกๆ 3 วินาที (3000 ms)
+setInterval(() => {
+    // เช็กว่าผู้ใช้ไม่ได้กำลังเปิดฟอร์มกรอกข้อมูลค้างอยู่ ป้องกันฟอร์มกระตุก
+    const modal = document.getElementById('productModal');
+    const isModalOpen = modal ? !modal.classList.contains('hidden') : false;
+    
+    if (!isModalOpen) {
+        fetchProducts();
+        fetchLogs();
+    }
+}, 3000);
     </script>
 </body>
 </html>
