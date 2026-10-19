@@ -195,5 +195,35 @@ def get_logs():
         logs = [dict(row) for row in rows]
     return jsonify(logs)
 
+def init_db():
+    with sqlite3.connect("inventory.db") as conn:
+        cursor = conn.cursor()
+        
+        # ตารางสินค้า (เอาคำว่า UNIQUE ออก เพื่อให้ใส่ขนาดซ้ำกันได้)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                category TEXT NOT NULL,
+                size TEXT,
+                quantity INTEGER NOT NULL,
+                minStock INTEGER NOT NULL,
+                image TEXT
+            )
+        ''')
+        
+        # ตารางประวัติ (ถ้ามี)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date TEXT NOT NULL,
+                productName TEXT NOT NULL,
+                type TEXT NOT NULL,
+                amount INTEGER NOT NULL,
+                note TEXT
+            )
+        ''')
+        conn.commit() 
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
