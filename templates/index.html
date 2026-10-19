@@ -45,6 +45,7 @@
 
                 <!-- Global Actions & Export Buttons -->
                 <div class="flex items-center space-x-2 flex-wrap gap-y-2">
+                    <!-- ปุ่มส่งออก PDF นำเข้า -->
                     <button onclick="exportPDFImport()" class="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium text-red-700 bg-white border border-slate-200 hover:bg-red-50 rounded-2xl transition-all shadow-sm">
                         <svg class="w-5 h-5 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -52,6 +53,7 @@
                         <span>ส่งออก <strong class="font-semibold text-red-800">PDF นำเข้า</strong></span>
                     </button>
 
+                    <!-- ปุ่ม PDF ประวัติสต๊อก -->
                     <button onclick="exportPDFLogs()" class="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium text-red-700 bg-white border border-slate-200 hover:bg-red-50 rounded-2xl transition-all shadow-sm">
                         <svg class="w-5 h-5 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -59,6 +61,7 @@
                         <span><strong class="font-semibold text-red-800">PDF ประวัติสต๊อก</strong></span>
                     </button>
 
+                    <!-- ปุ่มส่งออก Excel -->
                     <div class="flex flex-col items-end">
                         <span id="excelItemCountText" class="text-[10px] text-slate-400 font-normal pr-1 leading-none mb-1">ตั้งแต่เริ่มใช้ระบบ - 0 รายการ</span>
                         <button onclick="exportExcel()" class="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium text-red-700 bg-white border border-slate-200 hover:bg-red-50 rounded-2xl transition-all shadow-sm">
@@ -81,14 +84,16 @@
     <!-- Main Content Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-        <!-- Stats Overview Cards -->
+        <!-- Stats Overview Cards (3 การ์ด) -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                 <div>
                     <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">รายการสินค้าทั้งหมด</p>
                     <h3 id="statTotalItems" class="text-2xl font-bold text-slate-900 mt-1">0</h3>
                 </div>
-                <div class="p-3 bg-blue-50 text-blue-600 rounded-lg"><i data-lucide="layers" class="w-6 h-6"></i></div>
+                <div class="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                    <i data-lucide="layers" class="w-6 h-6"></i>
+                </div>
             </div>
 
             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
@@ -96,7 +101,9 @@
                     <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">จำนวนสต๊อกรวม</p>
                     <h3 id="statTotalStock" class="text-2xl font-bold text-slate-900 mt-1">0</h3>
                 </div>
-                <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg"><i data-lucide="archive" class="w-6 h-6"></i></div>
+                <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
+                    <i data-lucide="archive" class="w-6 h-6"></i>
+                </div>
             </div>
 
             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
@@ -104,7 +111,9 @@
                     <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">สต๊อกใกล้หมด</p>
                     <h3 id="statLowStock" class="text-2xl font-bold text-amber-600 mt-1">0</h3>
                 </div>
-                <div class="p-3 bg-amber-50 text-amber-600 rounded-lg"><i data-lucide="alert-triangle" class="w-6 h-6"></i></div>
+                <div class="p-3 bg-amber-50 text-amber-600 rounded-lg">
+                    <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                </div>
             </div>
         </div>
 
@@ -152,7 +161,9 @@
                                 <th class="px-4 py-3 text-center">การกระทำ</th>
                             </tr>
                         </thead>
-                        <tbody id="productTableBody" class="divide-y divide-slate-200"></tbody>
+                        <tbody id="productTableBody" class="divide-y divide-slate-200">
+                            <!-- Dynamic Content -->
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -170,7 +181,9 @@
                                 <th class="px-4 py-3">หมายเหตุ</th>
                             </tr>
                         </thead>
-                        <tbody id="logTableBody" class="divide-y divide-slate-200"></tbody>
+                        <tbody id="logTableBody" class="divide-y divide-slate-200">
+                            <!-- Dynamic Logs -->
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -190,6 +203,7 @@
             <form id="productForm" onsubmit="handleFormSubmit(event)" class="p-6 space-y-4">
                 <input type="hidden" id="editProductId">
 
+                <!-- Image Upload Section (บังคับใส่รูป) -->
                 <div>
                     <label class="block text-xs font-medium text-slate-700 mb-1">รูปภาพสินค้า <span class="text-rose-500">*</span></label>
                     <div class="flex items-center gap-4">
@@ -214,6 +228,7 @@
                     <input type="text" id="formName" required placeholder="ระบุชื่อสินค้า" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
+                <!-- หมวดหมู่ -->
                 <div>
                     <label class="block text-xs font-medium text-slate-700 mb-1">หมวดหมู่ <span class="text-rose-500">*</span></label>
                     <select id="formCategory" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
@@ -248,33 +263,23 @@
     <!-- JavaScript Logic -->
     <script>
         const categoryOptions = ["ของสด", "ของแห้ง", "น้ำพริก", "สมุนไพร", "ของนำเข้า"];
-        let products = [];
-        let logs = [];
+
+        const initialProducts = [
+            { id: 1, sku: '01', name: 'น้ำพริกอ่อง', category: 'น้ำพริก', quantity: 20, minStock: 5, image: '' }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('my_products')) || initialProducts;
+        let logs = JSON.parse(localStorage.getItem('my_logs')) || [];
         let currentBase64Image = '';
 
-        async function fetchProducts() {
-            try {
-                const res = await fetch('/api/products');
-                products = await res.json();
-                renderDashboard();
-            } catch (err) {
-                console.error("Error fetching products:", err);
-            }
-        }
-
-        async function fetchLogs() {
-            try {
-                const res = await fetch('/api/logs');
-                logs = await res.json();
-                renderLogsTable();
-            } catch (err) {
-                console.error("Error fetching logs:", err);
-            }
+        function saveData() {
+            localStorage.setItem('my_products', JSON.stringify(products));
+            localStorage.setItem('my_logs', JSON.stringify(logs));
+            renderDashboard();
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            fetchProducts();
-            fetchLogs();
+            renderDashboard();
         });
 
         function renderDashboard() {
@@ -293,6 +298,7 @@
             document.getElementById('statTotalItems').innerText = totalItems.toLocaleString('th-TH');
             document.getElementById('statTotalStock').innerText = totalStock.toLocaleString('th-TH');
             document.getElementById('statLowStock').innerText = lowStockCount.toLocaleString('th-TH');
+            
             document.getElementById('excelItemCountText').innerText = `ตั้งแต่เริ่มใช้ระบบ - ${totalItems.toLocaleString('th-TH')} รายการ`;
         }
 
@@ -306,7 +312,7 @@
                 const opt = document.createElement('option');
                 opt.value = cat;
                 opt.innerText = cat;
-                if (cat === selectedVal) opt.selected = true;
+                if(cat === selectedVal) opt.selected = true;
                 categorySelect.appendChild(opt);
             });
         }
@@ -398,85 +404,70 @@
             }
         }
 
-        async function adjustStock(id, changeAmount) {
-            try {
-                const res = await fetch(`/api/products/${id}/stock`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ changeAmount })
-                });
-                const data = await res.json();
-                if (!res.ok) {
-                    alert(data.error || 'เกิดข้อผิดพลาด');
-                    return;
-                }
-                fetchProducts();
-                fetchLogs();
-            } catch (err) {
-                console.error(err);
+        function adjustStock(id, changeAmount) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            const newQty = Number(product.quantity) + changeAmount;
+            if (newQty < 0) {
+                alert('ไม่สามารถปรับลดสต๊อกให้ติดลบได้');
+                return;
             }
+            product.quantity = newQty;
+            logs.unshift({
+                date: new Date().toLocaleString('th-TH'),
+                productName: product.name,
+                type: changeAmount > 0 ? 'รับเข้า' : 'เบิกออก',
+                amount: Math.abs(changeAmount),
+                note: changeAmount > 0 ? 'รับเข้าด่วน (+1)' : 'เบิกออกด่วน (-1)'
+            });
+            saveData();
         }
 
-        async function handleFormSubmit(e) {
+        function handleFormSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editProductId').value;
 
-            if (!editId && !currentBase64Image) {
+            // ตรวจสอบกรณีเพิ่มใหม่ หรือแก้ไขแล้วไม่มีรูปเดิมและไม่ได้อัปโหลดรูปใหม่
+            if (!currentBase64Image) {
                 alert('กรุณาอัปโหลดรูปภาพสินค้าก่อนบันทึกข้อมูล');
                 return;
             }
 
-            const payload = {
-                sku: document.getElementById('formSku').value.trim(),
-                name: document.getElementById('formName').value.trim(),
-                category: document.getElementById('formCategory').value,
-                quantity: parseInt(document.getElementById('formQuantity').value),
-                minStock: parseInt(document.getElementById('formMinStock').value),
-                image: currentBase64Image
-            };
+            const sku = document.getElementById('formSku').value.trim();
+            const name = document.getElementById('formName').value.trim();
+            const category = document.getElementById('formCategory').value;
+            const quantity = parseInt(document.getElementById('formQuantity').value);
+            const minStock = parseInt(document.getElementById('formMinStock').value);
 
-            try {
-                let res;
-                if (editId) {
-                    res = await fetch(`/api/products/${editId}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                } else {
-                    res = await fetch('/api/products', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+            if (editId) {
+                const product = products.find(p => p.id === parseInt(editId));
+                if (product) {
+                    product.sku = sku;
+                    product.name = name;
+                    product.category = category;
+                    product.quantity = quantity;
+                    product.minStock = minStock;
+                    product.image = currentBase64Image;
                 }
-
-                const data = await res.json();
-                if (!res.ok) {
-                    alert(data.error || 'เกิดข้อผิดพลาด');
-                    return;
-                }
-
-                closeModal();
-                fetchProducts();
-                fetchLogs();
-            } catch (err) {
-                console.error(err);
-                alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+            } else {
+                products.unshift({ 
+                    id: Date.now(), 
+                    sku, 
+                    name, 
+                    category, 
+                    quantity, 
+                    minStock, 
+                    image: currentBase64Image 
+                });
             }
+            saveData();
+            closeModal();
         }
 
-        async function deleteProduct(id) {
+        function deleteProduct(id) {
             if (confirm('คุณต้องการลบรายการสินค้านี้ใช่หรือไม่?')) {
-                try {
-                    const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
-                    if (res.ok) {
-                        fetchProducts();
-                        fetchLogs();
-                    }
-                } catch (err) {
-                    console.error(err);
-                }
+                products = products.filter(p => p.id !== id);
+                saveData();
             }
         }
 
@@ -536,6 +527,7 @@
             document.getElementById('productModal').classList.add('hidden');
         }
 
+        // --- ฟังก์ชันส่งออกไฟล์ Excel (.xlsx) ---
         function exportExcel() {
             if (products.length === 0) {
                 alert('ไม่มีข้อมูลสินค้าให้ส่งออก');
@@ -556,12 +548,18 @@
             XLSX.utils.book_append_sheet(workbook, worksheet, "รายการสินค้า");
 
             worksheet['!cols'] = [
-                { wch: 8 }, { wch: 15 }, { wch: 25 }, { wch: 15 }, { wch: 15 }, { wch: 15 }
+                { wch: 8 },
+                { wch: 15 },
+                { wch: 25 },
+                { wch: 15 },
+                { wch: 15 },
+                { wch: 15 }
             ];
 
             XLSX.writeFile(workbook, `inventory_export_${new Date().toISOString().slice(0,10)}.xlsx`);
         }
 
+        // --- ฟังก์ชันสร้าง PDF นำเข้าสินค้า ---
         function exportPDFImport() {
             if (products.length === 0) {
                 alert('ไม่มีข้อมูลสินค้า');
@@ -603,6 +601,7 @@
             html2pdf().from(element).save(`import_report_${new Date().toISOString().slice(0,10)}.pdf`);
         }
 
+        // --- ฟังก์ชันสร้าง PDF ประวัติสต๊อก ---
         function exportPDFLogs() {
             if (logs.length === 0) {
                 alert('ไม่มีประวัติการทำรายการ');
