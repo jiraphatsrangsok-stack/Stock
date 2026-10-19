@@ -404,6 +404,32 @@
             }
         }
 
+
+         async function fetchProducts() {
+    try {
+        // เพิ่ม ?t=... เพื่อบังคับให้เบราว์เซอร์ดึงข้อมูลสดจาก Render เสมอ ห้ามจำแคช
+        const res = await fetch('/api/products?t=' + new Date().getTime());
+        if (!res.ok) return;
+        const data = await res.json();
+        products = Array.isArray(data) ? data : [];
+        renderDashboard(); // เรียกวาดตารางและสถิติใหม่
+    } catch (err) {
+        console.error("Error fetching products:", err);
+    }
+}
+
+async function fetchLogs() {
+    try {
+        const res = await fetch('/api/logs?t=' + new Date().getTime());
+        if (!res.ok) return;
+        const data = await res.json();
+        logs = Array.isArray(data) ? data : [];
+        renderLogsTable();
+    } catch (err) {
+        console.error("Error fetching logs:", err);
+    }
+}
+
         function adjustStock(id, changeAmount) {
             const product = products.find(p => p.id === id);
             if (!product) return;
@@ -655,30 +681,7 @@ setInterval(() => {
     }
 }, 3000);
 
-          async function fetchProducts() {
-    try {
-        // เพิ่ม ?t=... เพื่อบังคับให้เบราว์เซอร์ดึงข้อมูลสดจาก Render เสมอ ห้ามจำแคช
-        const res = await fetch('/api/products?t=' + new Date().getTime());
-        if (!res.ok) return;
-        const data = await res.json();
-        products = Array.isArray(data) ? data : [];
-        renderDashboard(); // เรียกวาดตารางและสถิติใหม่
-    } catch (err) {
-        console.error("Error fetching products:", err);
-    }
-}
-
-async function fetchLogs() {
-    try {
-        const res = await fetch('/api/logs?t=' + new Date().getTime());
-        if (!res.ok) return;
-        const data = await res.json();
-        logs = Array.isArray(data) ? data : [];
-        renderLogsTable();
-    } catch (err) {
-        console.error("Error fetching logs:", err);
-    }
-}
+         
         
     </script>
 </body>
