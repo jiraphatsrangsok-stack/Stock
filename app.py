@@ -5,38 +5,6 @@ from datetime import datetime
 app = Flask(__name__)
 DB_NAME = "inventory.db"
 
-def init_db():
-    """สร้างตารางใน SQLite Database หากยังไม่มี"""
-    with sqlite3.connect(DB_NAME) as conn:
-        cursor = conn.cursor()
-        # ตารางสินค้า
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS products (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                sku TEXT UNIQUE NOT NULL,
-                name TEXT NOT NULL,
-                category TEXT NOT NULL,
-                quantity INTEGER NOT NULL,
-                minStock INTEGER NOT NULL,
-                image TEXT
-            )
-        ''')
-        # ตารางประวัติความเคลื่อนไหว
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS logs (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                date TEXT NOT NULL,
-                productName TEXT NOT NULL,
-                type TEXT NOT NULL,
-                amount INTEGER NOT NULL,
-                note TEXT
-            )
-        ''')
-        conn.commit()
-
-# เรียกใช้งานฟังก์ชันสร้างฐานข้อมูลเมื่อเริ่มต้นเซิร์ฟเวอร์
-init_db()
-
 @app.route('/')
 def index():
     """ส่งหน้า HTML หลัก"""
